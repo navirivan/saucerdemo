@@ -1,15 +1,14 @@
 import { test as base } from "@playwright/test";
 import { LoginPage } from "../../pages/LoginPage";
-import { ProductPage } from "../../pages/ProductPage";
 
-type ProductFixtures = {
-	productPage: ProductPage;
+type AuthFixtures = {
 	loginHelper: {
 		login: (username: string, password: string) => Promise<void>;
 	};
+	authenticatedPage: import("@playwright/test").Page;
 };
 
-export const productTest = base.extend<ProductFixtures>({
+export const authFixtures = base.extend<AuthFixtures>({
 	loginHelper: async ({ page }, use) => {
 		const loginPage = new LoginPage(page);
 		await use({
@@ -20,9 +19,9 @@ export const productTest = base.extend<ProductFixtures>({
 		});
 	},
 
-	productPage: async ({ page }, use) => {
-		await use(new ProductPage(page));
+	authenticatedPage: async ({ page, loginHelper }, use) => {
+		await loginHelper.login("standard_user", "secret_sauce");
+		await use(page);
+		console.log("logout");
 	},
 });
-
-export { expect } from "@playwright/test";

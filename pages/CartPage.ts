@@ -14,10 +14,10 @@ export class CartPage extends BasePage {
 	}
 
 	async removeFirstItem() {
-		await this.removeItemButton.click();
+		await this.clickElement(this.removeItemButton);
 	}
 
 	async checkingOut() {
-		await this.checkoutButton.click();
+		await this.clickElement(this.checkoutButton);
 	}
 }

@@ -28,14 +28,13 @@ export class ProductPage extends BasePage {
 		const totalItems: number = await this.addItemButton.count();
 		const randomItem: number = Math.floor(Math.random() * totalItems);
 
-		await this.addItemButton
-			.nth(randomItem)
-			.filter({ hasText: "ADD TO CART" })
-			.click();
+		await this.clickElement(
+			this.addItemButton.nth(randomItem).filter({ hasText: "ADD TO CART" }),
+		);
 		await expect(this.addItemButton.nth(randomItem)).toHaveText("Remove");
 	}
 
 	async goToCart() {
-		await this.cartBadge.click();
+		await this.clickElement(this.cartBadge);
 	}
 }

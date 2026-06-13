@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { test } from "../tests/fixtures";
 
 export class BasePage {
 	readonly page: Page;
@@ -8,14 +9,20 @@ export class BasePage {
 	}
 
 	async clickElement(locator: Locator) {
-		await locator.click();
+		await test.step(`Clicking on element: ${locator.toString()}`, async () => {
+			await locator.click();
+		});
 	}
 
 	async fillText(locator: Locator, text: string) {
-		await locator.fill(text);
+		await test.step(`Filling text: "${text}" into element: ${locator.toString()}`, async () => {
+			await locator.fill(text);
+		});
 	}
 
 	async navigateTo(url: string) {
-		await this.page.goto(url);
+		await test.step(`Navigating to URL: ${url}`, async () => {
+			await this.page.goto(url);
+		});
 	}
 }
