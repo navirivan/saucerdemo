@@ -17,6 +17,8 @@ jobs:
         run: npm install
       - name: Install ci
         run: npm ci
+      - name: Install latest Playwright
+        run: npm install -D @playwright/test
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
