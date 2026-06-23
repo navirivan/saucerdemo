@@ -6,11 +6,13 @@
 	"scripts": {
 		"build": "tsc",
 		"test": "npx playwright test",
+		"test:ui": "npx playwright test --ui",
 		"report": "npx playwright show-report"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.52.0",
-		"@types/node": "^24.0.0",
+		"@types/node": "^24.13.2",
+		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.5.3"
 	},
 	"private": true

@@ -1,12 +1,14 @@
 import { test as base } from "@playwright/test";
-import { ProductPage } from "../../pages/ProductPage";
-import { CartPage } from "../../pages/CartPage";
-import { CheckoutPage } from "../../pages/CheckoutPage";
-import { OverviewPage } from "../../pages/OverviewPage";
-import { CheckoutCompletePage } from "../../pages/CheckoutCompletePage";
+import { ProductPage } from "../../src/pages/ProductPage";
+import { CartPage } from "../../src/pages/CartPage";
+import { CheckoutPage } from "../../src/pages/CheckoutPage";
+import { OverviewPage } from "../../src/pages/OverviewPage";
+import { CheckoutCompletePage } from "../../src/pages/CheckoutCompletePage";
+import { LoginPage } from "../../src/pages/LoginPage";
 
 type PageFixtures = {
 	// loginTest,
+	loginPage: LoginPage;
 	productPage: ProductPage;
 	cartPage: CartPage;
 	checkoutPage: CheckoutPage;
@@ -15,6 +17,9 @@ type PageFixtures = {
 };
 
 export const pageFixtures = base.extend<PageFixtures>({
+	loginPage: async ({ page }, use) => {
+		await use(new LoginPage(page));
+	},
 	productPage: async ({ page }, use) => {
 		await use(new ProductPage(page));
 	},
